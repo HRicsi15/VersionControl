@@ -22,8 +22,8 @@ namespace UserMaintenance
             listUsers.ValueMember = "ID";
             listUsers.DisplayMember = "FullName";
 
-            lblLastName.Text = Resource1.LastName; //label1
-            lblFirstName.Text = Resource1.FirstName;
+            lblFullName.Text = Resource1.FullName; //label1
+           // lblFirstName.Text = Resource1.FirstName;
             btnAdd.Text = Resource1.Add;
         }
 
@@ -31,8 +31,8 @@ namespace UserMaintenance
         {
             var u = new User()
             {
-                LastName = txtLastName.Text,
-                FirstName = txtFirstName.Text
+                FullName = txtFullName.Text,
+                //FirstName = txtFirstName.Text
             };
             users.Add(u);
         }
