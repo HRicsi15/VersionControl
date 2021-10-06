@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace Excel_generalasa_w04
 {
@@ -14,10 +16,14 @@ namespace Excel_generalasa_w04
     {
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
+
+        
         public Form1()
         {
             InitializeComponent();
             LoadData();
+
+          
         }
 
         private void LoadData()
