@@ -134,7 +134,7 @@ namespace Excel_generalasa_w04
             //ide másoljuk be a tartományt
             xlSheet.get_Range(
              GetCell(2, 1),
-             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;//d-ik, első dimenizójából a getlengthnek
+             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;//0-ik, első dimenizójából a getlengthnek
 
             //getCell(100, 100)-hiányzó adatok lesznek 
 
@@ -159,9 +159,9 @@ namespace Excel_generalasa_w04
             firstColumn.Font.Bold = true;
             firstColumn.Interior.Color = Color.LightYellow;
 
-            Excel.Range lastColumn = xlSheet.get_Range(GetCell(2, values.GetLength(1)), GetCell(1 + values.GetLength(0), values.GetLength(1)));
-            firstColumn.NumberFormat = "###,###,00";
-            firstColumn.Interior.Color = Color.LightGreen;
+            Excel.Range lastColumn = xlSheet.get_Range(GetCell(2, values.GetLength(1)), GetCell(1 + values.GetLength(0), values.GetLength(1))); //getlengt0 - utolsó oszlop, 1 - utolsó sor
+            lastColumn.NumberFormat = "###,###,00";
+            lastColumn.Interior.Color = Color.LightGreen;
         }
     }
 
