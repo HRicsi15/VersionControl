@@ -23,7 +23,7 @@ namespace Excel_generalasa_w04
 
 
 
-        private string GetCell(int x, int y)
+        private string GetCell(int x, int y)//lehetővé teszi meghatározni koord alapján milyen az excel által használt koordináták 
         {
             string ExcelCoordinate = "";
             int dividend = y;
@@ -46,6 +46,8 @@ namespace Excel_generalasa_w04
             InitializeComponent();
             LoadData();
 
+            //datagridview1.Datasource = lakasok;//így is lehet.
+
             CreateExcel();
         }
 
@@ -59,23 +61,24 @@ namespace Excel_generalasa_w04
             try
             {
                 // Excel elindítása és az applikáció objektum betöltése
-                xlApp = new Excel.Application();
+                xlApp = new Excel.Application(); //itt hozom létre az ecxelt, példányosítom
 
                 // Új munkafüzet
-                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlWB = xlApp.Workbooks.Add(Missing.Value); //füzet kigenerálásaz(üres)
 
                 // Új munkalap
-                xlSheet = xlWB.ActiveSheet;
+                xlSheet = xlWB.ActiveSheet; //aktuális munkalap, első oldal
 
                 // Tábla létrehozása
                 CreateTable(); // Ennek megírása a következő feladatrészben következik
 
-                // Control átadása a felhasználónak
+                // Control átadása a felhasználónak, eddig rejtett volt az app
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
             }
             catch (Exception ex) // Hibakezelés a beépített hibaüzenettel
             {
+                //melyik soron volt a hiba
                 string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
                 MessageBox.Show(errMsg, "Error");
 
@@ -100,13 +103,13 @@ namespace Excel_generalasa_w04
              "Ár (mFt)",
              "Négyzetméter ár (Ft/m2)"};
 
-            for (int i = 0; i < headers.Length; i++)
+            for (int i = 0; i < headers.Length; i++)//fejlécek végéig. (sor, oszlop) beleírjuk az első sorba a tömböt
             {
                 //xlSheet.Cells[1, 1] = headers[0];
                 xlSheet.Cells[1,i+1]= headers[0+i];
             }
 
-            object[,] values = new object[Flats.Count, headers.Length];
+            object[,] values = new object[Flats.Count, headers.Length]; //range. egyesével másolni az adatokat lassabb lenn
 
             int counter = 0;
             foreach (Flat f in Flats)
@@ -120,17 +123,20 @@ namespace Excel_generalasa_w04
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
-                values[counter, 8] = "=" + GetCell(counter + 2, 8) + "*1000000/" + GetCell(counter + 2, 7);
+                values[counter, 8] = "=" + GetCell(counter + 2, 8) + "*1000000/" + GetCell(counter + 2, 7);//2 sor 8 oszlop * 2 sor 7 oszlop
 
-                
+                //values[counter. 4] = lakas.Elevator? "van": "nincs";
+                //values[counter, 8] = string.Format{ }
+
                 counter++;      
             }
 
-
+            //ide másoljuk be a tartományt
             xlSheet.get_Range(
              GetCell(2, 1),
-             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;//d-ik, első dimenizójából a getlengthnek
 
+            //getCell(100, 100)-hiányzó adatok lesznek 
 
 
             Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
@@ -141,6 +147,9 @@ namespace Excel_generalasa_w04
             headerRange.RowHeight = 40;
             headerRange.Interior.Color = Color.LightBlue;
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+           /* int lastRowID = xlSheet.UsedRange.Rows.Count;
+            Excel.Range completeRange = */
 
 
             Excel.Range tableRange = xlSheet.get_Range(GetCell(2, 1), GetCell(1 + values.GetLength(0), values.GetLength(1)));
