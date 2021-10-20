@@ -16,6 +16,8 @@ namespace w5_var
         List<Tick> ticks;
         PortfolioEntities context = new PortfolioEntities();
 
+        List<Entities.PortfolioItem> Portfolio = new List<Entities.PortfolioItem>();
+
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +25,25 @@ namespace w5_var
             dataGridView1.DataSource = context.Ticks.Local;*/ //talán lehet így is, lehet ideiglenes 
             ticks = context.Ticks.ToList();
             dataGridView1.DataSource = ticks;
+
+            CreatePortfolio();
         }
+
+        private void CreatePortfolio()
+        {
+            Portfolio.Add(new Entities.PortfolioItem() { Index = "OTP", Volume = 10 });
+            Portfolio.Add(new Entities.PortfolioItem() {Index="ZWACK", Volume = 10 });
+            Portfolio.Add(new Entities.PortfolioItem() { Index = "ELMU", Volume = 10 });
+            
+            /*ugyanaz a kettő
+            Entities.PortfolioItem p = new Entities.PortfolioItem();
+            p.Index = "OTP";
+            p.Volume = 10;
+            Portfolio.Add(p);*/
+
+
+            dataGridView2.DataSource = Portfolio;
+        }
+       
     }
 }
