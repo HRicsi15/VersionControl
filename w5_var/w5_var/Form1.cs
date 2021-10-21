@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace w5_var
         PortfolioEntities context = new PortfolioEntities();
 
         List<Entities.PortfolioItem> Portfolio = new List<Entities.PortfolioItem>();
+
+        List<decimal> Nyereségek = new List<decimal>();
 
         public Form1()
         {
@@ -69,7 +72,7 @@ namespace w5_var
 
 
 
-            List<decimal> Nyereségek = new List<decimal>();
+            //List<decimal> Nyereségek = new List<decimal>();
             int intervalum = 30;
             DateTime kezdőDátum = (from x in ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -118,6 +121,23 @@ namespace w5_var
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+
+            using (StreamWriter sw = new StreamWriter(sfd.FileName))
+            {
+                sw.WriteLine("Időszak\tNyereség");
+                for (int i = 0; i < Nyereségek.Count; i++)
+                {
+                    sw.WriteLine((i + 1).ToString() + "\t" + Nyereségek[i]);
+                }
+            }
         }
     }
 }
