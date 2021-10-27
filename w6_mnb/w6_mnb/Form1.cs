@@ -29,7 +29,7 @@ namespace w6_mnb
 
             XML();
 
-            //Chart();
+            Chart();
         }
 
         private void GetExchangeRates()
@@ -74,7 +74,7 @@ namespace w6_mnb
 
         }
 
-        /*private void Chart()
+        private void Chart()
         {
             chartRateData.DataSource = Rates;
 
@@ -91,6 +91,6 @@ namespace w6_mnb
             chartArea.AxisX.MajorGrid.Enabled = false;
             chartArea.AxisY.MajorGrid.Enabled = false;
             chartArea.AxisY.IsStartedFromZero = false;
-        }*/
+        }
     }
 }
