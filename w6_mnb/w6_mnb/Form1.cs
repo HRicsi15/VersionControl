@@ -16,13 +16,16 @@ namespace w6_mnb
 {
     public partial class Form1 : Form
     {
-        BindingList <RateData> Rates = new BindingList<RateData>();
-       
-        
+        BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>(); //?
+
         public string result2;
+        
         public Form1()
         {
             InitializeComponent();
+
+            GetCurrencies();
 
             RefreshData();
         }
@@ -38,18 +41,18 @@ namespace w6_mnb
                 endDate = "2020-06-30"
             };*/
 
-            var request = new GetExchangeRatesRequestBody()
-            {
+           var request = new GetExchangeRatesRequestBody()
+           {
                 currencyNames = comboBox1.SelectedItem.ToString(),
                 startDate = dateTimePicker1.Value.ToString(),
                 endDate = dateTimePicker2.Value.ToString()
-            }; 
+           }; 
 
-             var response = mnbService.GetExchangeRates(request);//bemenetis függvény
+            var response = mnbService.GetExchangeRates(request);//bemenetis függvény
 
             var result = response.GetExchangeRatesResult;//az eredmény tulajdonsága
 
-             result2 = result;
+            result2 = result;
         }
 
         private void XML()
@@ -65,6 +68,8 @@ namespace w6_mnb
                 rateData.Date = DateTime.Parse(item.GetAttribute("date"));
 
                 var childItem = (XmlElement)item.ChildNodes[0];
+                if (childItem == null)
+                    continue;
                 rateData.Currency = childItem.GetAttribute("curr");
 
                 var unit = decimal.Parse(childItem.GetAttribute("unit"));
@@ -97,6 +102,7 @@ namespace w6_mnb
 
         private void RefreshData()
         {
+            
             Rates.Clear();
             GetExchangeRates();
 
@@ -106,8 +112,6 @@ namespace w6_mnb
 
             Chart();
 
-           /* BindingList<string> Currencies = new BindingList<string>();
-            comboBox1.DataSource = Currencies;*/
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -123,6 +127,26 @@ namespace w6_mnb
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshData();
+        }
+
+        private void GetCurrencies()
+        {
+            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient(); 
+            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+            
+            //xml fgv
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
+            
+            foreach (XmlElement item in xml.DocumentElement.ChildNodes[0])
+            {
+                string newItem = item.InnerText;
+                Currencies.Add(newItem);
+            }
+            comboBox1.DataSource = Currencies;
         }
     }
 }
