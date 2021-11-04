@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace w8_fejlesztesi_mintak.Entities
 {
-    class BallFactory
+    public class BallFactory //fontos hogy public 
     {
         public Ball CreateNew() //Ball viszatérési érték
         {
