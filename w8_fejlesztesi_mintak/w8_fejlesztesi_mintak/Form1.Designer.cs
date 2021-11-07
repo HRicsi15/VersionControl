@@ -37,7 +37,6 @@ namespace w8_fejlesztesi_mintak
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // createTimer
@@ -48,13 +47,9 @@ namespace w8_fejlesztesi_mintak
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.button3);
-            this.mainPanel.Controls.Add(this.label1);
-            this.mainPanel.Controls.Add(this.button2);
-            this.mainPanel.Controls.Add(this.button1);
-            this.mainPanel.Location = new System.Drawing.Point(-8, 5);
+            this.mainPanel.Location = new System.Drawing.Point(-8, 136);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(818, 433);
+            this.mainPanel.Size = new System.Drawing.Size(818, 302);
             this.mainPanel.TabIndex = 0;
             // 
             // conveyorTimer
@@ -65,7 +60,7 @@ namespace w8_fejlesztesi_mintak
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(21, 22);
+            this.button1.Location = new System.Drawing.Point(3, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 35);
             this.button1.TabIndex = 0;
@@ -75,7 +70,7 @@ namespace w8_fejlesztesi_mintak
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(160, 22);
+            this.button2.Location = new System.Drawing.Point(128, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(109, 35);
             this.button2.TabIndex = 1;
@@ -86,7 +81,7 @@ namespace w8_fejlesztesi_mintak
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(291, 22);
+            this.label1.Location = new System.Drawing.Point(274, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 17);
             this.label1.TabIndex = 2;
@@ -95,7 +90,7 @@ namespace w8_fejlesztesi_mintak
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Firebrick;
-            this.button3.Location = new System.Drawing.Point(21, 63);
+            this.button3.Location = new System.Drawing.Point(3, 41);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(108, 33);
             this.button3.TabIndex = 3;
@@ -107,12 +102,15 @@ namespace w8_fejlesztesi_mintak
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.mainPanel);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

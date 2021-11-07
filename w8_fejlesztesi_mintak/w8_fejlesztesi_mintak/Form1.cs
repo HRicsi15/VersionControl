@@ -33,7 +33,7 @@ namespace w8_fejlesztesi_mintak
         {
             InitializeComponent();
 
-            Factory = new CarFactory();// töltsd fel a Factory változót egy BallFactory példánnyal
+            Factory = new BallFactory();// töltsd fel a Factory változót egy BallFactory példánnyal
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
@@ -72,7 +72,10 @@ namespace w8_fejlesztesi_mintak
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory()
+            {
+                BallColor = button3.BackColor
+            };
         }
 
         private void DisplayNext()

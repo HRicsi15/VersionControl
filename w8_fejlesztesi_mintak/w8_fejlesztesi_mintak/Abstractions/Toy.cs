@@ -16,6 +16,7 @@ namespace w8_fejlesztesi_mintak.Abstractions
             Width = 50;
             Height = 50;
             Paint += Ball_Paint;
+            Top = 100;
         }
 
         private void Ball_Paint(object sender, PaintEventArgs e)
