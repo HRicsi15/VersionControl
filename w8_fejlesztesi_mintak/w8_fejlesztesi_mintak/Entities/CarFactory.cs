@@ -7,11 +7,11 @@ using w8_fejlesztesi_mintak.Abstractions;
 
 namespace w8_fejlesztesi_mintak.Entities
 {
-    public class BallFactory : IToyFactory //fontos hogy public 
+   public class CarFactory : IToyFactory
     {
-        public Toy CreateNew() //Ball/ Toy viszatérési érték
+        public Toy CreateNew()
         {
-            return new Ball(); //fgv-ben léterhozunk 1Ball példányt és visszaadjuk az értékét
+            return new Car();
         }
     }
 }
