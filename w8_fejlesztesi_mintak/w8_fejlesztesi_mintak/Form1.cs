@@ -88,5 +88,18 @@ namespace w8_fejlesztesi_mintak
             Controls.Add(_nextToy);
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;//változó amiben a sendert buttoná castolom
+            var colorPicker = new ColorDialog();//példányosítok
+
+            colorPicker.Color = button3.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            button3.BackColor = colorPicker.Color;
+        }
     }
 }
