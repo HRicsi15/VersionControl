@@ -74,7 +74,7 @@ namespace w8_fejlesztesi_mintak
         {
             Factory = new BallFactory()
             {
-                BallColor = button3.BackColor
+                BallColor = colorButton.BackColor
             };
         }
 
@@ -97,12 +97,48 @@ namespace w8_fejlesztesi_mintak
             var button = (Button)sender;//változó amiben a sendert buttoná castolom
             var colorPicker = new ColorDialog();//példányosítok
 
-            colorPicker.Color = button3.BackColor;
+            colorPicker.Color = colorButton.BackColor;
             if (colorPicker.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-            button3.BackColor = colorPicker.Color;
+            colorButton.BackColor = colorPicker.Color;
+        }
+
+        private void presentButton_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory()
+            {
+                RibbonColor = ribbonButton.BackColor,//vessző
+                BoxColor = boxButton.BackColor
+                
+            };
+        }
+
+        private void ribbonButton_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;//változó amiben a sendert buttoná castolom
+            var colorPicker = new ColorDialog();//példányosítok
+
+            colorPicker.Color = ribbonButton.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            ribbonButton.BackColor = colorPicker.Color;
+        }
+
+        private void boxButton_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;//változó amiben a sendert buttoná castolom
+            var colorPicker = new ColorDialog();//példányosítok
+
+            colorPicker.Color = boxButton.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            boxButton.BackColor = colorPicker.Color;
         }
     }
 }

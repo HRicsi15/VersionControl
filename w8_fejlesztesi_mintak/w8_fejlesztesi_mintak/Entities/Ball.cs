@@ -39,7 +39,6 @@ namespace w8_fejlesztesi_mintak.Entities
                
         
         
-        
         /*
                 public void MoveBall()
                 {
