@@ -25,8 +25,22 @@ namespace UnitTestExample.Test
             Assert.AreEqual(expectedResult, actualResult);
             
         }
-        
-   
+
+        [Test, TestCase("ABCD1234", false),//nincs kisbetű
+          TestCase("Ab1234", false), //túl rövid jelszó
+          TestCase("Abcd1234", true), //megfelelő jelszó
+          TestCase("abcd1234", false), //nincs nagybetű
+          TestCase("abcdABCD", false)]//nincs szám
+        public void TestValidatePassword(string password, bool expectedResult)
+        {
+            // Arrange
+            var accountController = new AccountController();
+            // Act
+            var actualResult = accountController.ValidatePassword(password);
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
 
     }
 }
