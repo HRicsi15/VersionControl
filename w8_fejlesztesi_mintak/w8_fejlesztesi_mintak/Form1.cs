@@ -56,7 +56,7 @@ namespace w8_fejlesztesi_mintak
                 }
             }
 
-            if (maxPosition>=100)
+            if (maxPosition>=1000)
             {
                 var oldestToy = _toys[0];
                 _toys.Remove(oldestToy);
