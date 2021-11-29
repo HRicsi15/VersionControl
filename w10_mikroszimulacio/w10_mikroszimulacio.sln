@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "w10_mikroszimulacio", "w10_mikroszimulacio\w10_mikroszimulacio.csproj", "{B3254A1F-7432-4A12-B4E9-EED3BB1FC64D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3254A1F-7432-4A12-B4E9-EED3BB1FC64D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3254A1F-7432-4A12-B4E9-EED3BB1FC64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3254A1F-7432-4A12-B4E9-EED3BB1FC64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3254A1F-7432-4A12-B4E9-EED3BB1FC64D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7B4E63A-66A2-4396-AE09-C4E5ADD6ADD3}
+	EndGlobalSection
+EndGlobal
