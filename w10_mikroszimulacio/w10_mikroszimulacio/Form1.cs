@@ -14,32 +14,16 @@ namespace w10_mikroszimulacio
 {
     public partial class Form1 : Form
     {
-        List<Person> Population = new List<Person>();
-        List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
-        List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
+        List<Person> Population = null; //new List<Person>();
+        List<BirthProbability> BirthProbabilities = null; // new List<BirthProbability>();
+        List<DeathProbability> DeathProbabilities = null; // new List<DeathProbability>();
+
+        //List<int> men = new List<int>(); //enyém
+        //List<int> women = new List<int>(); //enyém
 
         Random rng = new Random(1234);
 
-        public List<Person> GetPopulation(string csvpath)
-        {
-            List<Person> population = new List<Person>();
-
-            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
-            {
-                while (!sr.EndOfStream)
-                {
-                    var line = sr.ReadLine().Split(';');
-                    population.Add(new Person()
-                    {
-                        BirthYear = int.Parse(line[0]),
-                        Gender = (Gender)Enum.Parse(typeof(Gender), line[1]),
-                        NbrOfChildren = int.Parse(line[2])
-                    });
-                }
-            }
-
-            return population;
-        }
+        
 
         public List<BirthProbability> GetBirthProbabilities(string csvpath)
         {
@@ -83,25 +67,31 @@ namespace w10_mikroszimulacio
             return db;
         }
 
-      
+
 
         public Form1()
         {
             InitializeComponent();
 
-            Population = GetPopulation(@"C:\Temp\nép.csv");
+
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
+            Start((int)numericUpDown1.Value, txtFolder.Text);
+        }
 
+        public void Start(int endYear, string csvPath)
+        {
+            Population = GetPopulation(csvPath);
 
             // Végigmegyünk a vizsgált éveken
-            for (int year = 2005; year <= 2024; year++)
+            for (int year = 2005; year <= numericUpDown1.Value; year++) //2024 helyett
             {
                 // Végigmegyünk az összes személyen
                 for (int i = 0; i < Population.Count; i++)
                 {
                     // Ide jön a szimulációs lépés
-                    SimStep(year, Population.ElementAt(i));//???jó-e
+                    SimStep(year, Population[i]);
+
                 }
 
                 int nbrOfMales = (from x in Population
@@ -112,9 +102,32 @@ namespace w10_mikroszimulacio
                                     select x).Count();
                 Console.WriteLine(
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+                richTextBox1.Text += (
+                    string.Format("Év:{0} \n Fiúk:{1} \n Lányok:{2} \n", year, nbrOfMales, nbrOfFemales));
+               // "Szimulációs év: " + year + "\n" + "\t" + men[valtozo] + "\n" + "\t" + women[valtozo] + "\t" + "\t";
             }
         }
+        public List<Person> GetPopulation(string csvpath)
+        {
+            List<Person> population = new List<Person>();
 
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    sr.ReadLine();//headert eldobom
+                    var line = sr.ReadLine().Split(';');
+                    population.Add(new Person()
+                    {
+                        BirthYear = int.Parse(line[0]),
+                        Gender = (Gender)Enum.Parse(typeof(Gender), line[1]),
+                        NbrOfChildren = int.Parse(line[2])
+                    });
+                }
+            }
+
+            return population;
+        }
         private void SimStep(int year, Person person)
         {
             //Ha halott akkor kihagyjuk, ugrunk a ciklus következő lépésére
@@ -149,6 +162,53 @@ namespace w10_mikroszimulacio
                     Population.Add(újszülött);
                 }
             }
+        }
+
+
+
+        private void StartBtn_Click(object sender, EventArgs e)//nem kell ez már
+        {
+                Start((int)numericUpDown1.Value, txtFolder.Text);
+
+               /* richTextBox1.Clear(); //listák üritése
+            men.Clear();
+            women.Clear();
+
+            //
+
+                men.Add(nbrOfMales);
+                women.Add(nbrOfFemales);//enyém
+                DisplayResults(); //ide kell???*/
+            
+        }
+
+        private void BrowseBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = txtFolder.Text;
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            txtFolder.Text = ofd.FileName;
+        }
+
+        private void DisplayResults()
+        {/*
+            int valtozo = 0;
+            for (int year = 2005; year <= numericUpDown1.Value; year++) //2024 helyett
+            {
+
+                
+                    richTextBox1.Text += "Szimulációs év: " + year + "\n" + "\t" + men[valtozo]+ "\n" + "\t" + women[valtozo]+ "\t"+ "\t";
+
+                valtozo++;
+              
+            }*/
+        }
+
+        private void StartBtn_Click_1(object sender, EventArgs e)
+        {
+            richTextBox1.Clear(); //listák üritése
+            Start((int)numericUpDown1.Value, txtFolder.Text);
         }
     }
 }
