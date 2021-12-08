@@ -20,6 +20,9 @@ namespace w11_evolucios_algoritmus
             InitializeComponent();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga); //megjelenítem formon
+            //új játkos hozzáadása, és játék indítása 
+            //gc.AddPlayer();
+           // gc.Start(true);
         }
     }
 }
