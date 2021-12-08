@@ -38,6 +38,7 @@ namespace UnitTestExample.Test
           TestCase("abcdABCD", false)]//nincs szám
         public void TestValidatePassword(string password, bool expectedResult)
         {
+
             /*
             // Arrange
             var accountController = new AccountController();
@@ -69,6 +70,22 @@ namespace UnitTestExample.Test
             }
             else { expectedResult = false; }
         }
+
+        [Test, TestCase("ABCD1234", false),//nincs kisbetű
+         TestCase("Ab1234", false), //túl rövid jelszó
+         TestCase("Abcd1234", true), //megfelelő jelszó
+         TestCase("abcd1234", false), //nincs nagybetű
+         TestCase("abcdABCD", false)]//nincs szám
+        public bool TestValidatePassword2(string password, bool expectedResult)
+        {
+            var hasLowercase = new Regex(@"[a-z]+");
+            var hasUppercase = new Regex(@"[A-Z]+");
+            var hasNumber = new Regex(@"[0-9]+");
+            var is8Long = new Regex(@".{8,}");//legalább 8 karakterű
+
+            return hasLowercase.IsMatch(password) && hasUppercase.IsMatch(password) && hasNumber.IsMatch(password) && is8Long.IsMatch(password);
+        }
+
 
         [
             Test,
